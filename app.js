@@ -62,3 +62,29 @@ botonesHeader.forEach((boton) =>
     }
   })
 );
+
+//barra de busqueda
+
+const formPokemon = document.querySelector("#formPokemon");
+      const inputPokemon = document.querySelector("#inputPokemon");
+      const divInfoPokemon = document.querySelector("#infoPokemon");
+
+      formPokemon.addEventListener("submit", (event) => {
+        event.preventDefault();
+        divInfoPokemon.innerHTML = "<img src='loading.webp' />";
+        cargarPokemon(inputPokemon.value);
+      });
+
+      function cargarPokemon(numero) {
+        fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
+          .then((response) => response.json())
+          .then((pokemon) => {
+            divInfoPokemon.innerHTML = `
+                <h1>#${pokemon.id} ${pokemon.name}</h1>
+                <img src="${pokemon.sprites.other.dream_world.front_default}" />
+                <p>Peso: ${pokemon.weight}lbs |
+                Altura: ${pokemon.height}"
+                | HP: ${pokemon.stats[0].base_stat}</p>
+            `;
+          });
+      }
