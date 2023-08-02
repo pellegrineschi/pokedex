@@ -76,15 +76,31 @@ const formPokemon = document.querySelector("#formPokemon");
       });
 
       function cargarPokemon(numero) {
+        
         fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
           .then((response) => response.json())
-          .then((pokemon) => {
+          .then((poke) => {
             divInfoPokemon.innerHTML = `
-                <h1>#${pokemon.id} ${pokemon.name}</h1>
-                <img src="${pokemon.sprites.other.dream_world.front_default}" />
-                <p>Peso: ${pokemon.weight}lbs |
-                Altura: ${pokemon.height}"
-                | HP: ${pokemon.stats[0].base_stat}</p>
-            `;
+            <div class="pokemon">
+            <p class="pokemon-id-back">#${poke.id}</p>
+            <div class="pokemon-imagen">  
+                    <img src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
+                </div>
+            <div class="pokemon-info">
+                <div class="nombre-contenedor">
+                    <p class="pokemon-id">#${poke.id}</p>
+                    <h2 class="pokemon-nombre">${poke.name}</h2>
+                </div>
+                
+            </div>
+        </div>`;
+                // <div class="pokemon">
+                // <h1>#${pokemon.id} ${pokemon.name}</h1>
+                // <img src="${pokemon.sprites.other.dream_world.front_default}" />
+                // <p>Peso: ${pokemon.weight}lbs |
+                // Altura: ${pokemon.height}"
+                // | HP: ${pokemon.stats[0].base_stat}</p>
+                // </div>
+            
           });
       }
