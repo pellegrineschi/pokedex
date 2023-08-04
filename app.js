@@ -1,3 +1,9 @@
+class Pokemon {
+  constructor(id, nombre, imegen = false) {
+    (this.id = id), (this.nombre = nombre), (this.imegen = imegen);
+  }
+}
+
 const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 let URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -35,8 +41,21 @@ function mostrarPokemon(poke) {
             <p class="stat">${poke.height}M</p>
             <p class="stat">${poke.weight}KG</p>
         </div>
+        <div>
+        <a href="#" class="btnAgregar">Agregar a la pokeball</a>
+        </div>
     </div>
 </div>`;
+  //botones
+  const botonesAgregar = document.querySelectorAll(".btnAgregar");
+  for(const boton of botonesAgregar){
+    boton.addEventListener("click",(event) => {
+      event.preventDefault();
+      console.log("estyo hacindo click en agragar a la pokeball");
+
+    })
+  }
+
   listaPokemon.append(div);
 }
 
@@ -66,41 +85,49 @@ botonesHeader.forEach((boton) =>
 //barra de busqueda
 
 const formPokemon = document.querySelector("#formPokemon");
-      const inputPokemon = document.querySelector("#inputPokemon");
-      const divInfoPokemon = document.querySelector("#infoPokemon");
+const inputPokemon = document.querySelector("#inputPokemon");
+const divInfoPokemon = document.querySelector("#infoPokemon");
 
-      formPokemon.addEventListener("submit", (event) => {
-        event.preventDefault();
-        divInfoPokemon.innerHTML = "<img src='loading.webp' />";
-        cargarPokemon(inputPokemon.value);
-      });
+formPokemon.addEventListener("submit", (event) => {
+  event.preventDefault();
+  divInfoPokemon.innerHTML = "<img src='loading.webp' />";
+  cargarPokemon(inputPokemon.value);
+});
 
-      function cargarPokemon(numero) {
-        
-        fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
-          .then((response) => response.json())
-          .then((poke) => {
-            divInfoPokemon.innerHTML = `
-            <div class="pokemon">
-            <p class="pokemon-id-back">#${poke.id}</p>
-            <div class="pokemon-imagen">  
-                    <img src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
-                </div>
-            <div class="pokemon-info">
-                <div class="nombre-contenedor">
-                    <p class="pokemon-id">#${poke.id}</p>
-                    <h2 class="pokemon-nombre">${poke.name}</h2>
-                </div>
-                
-            </div>
-        </div>`;
-                // <div class="pokemon">
-                // <h1>#${pokemon.id} ${pokemon.name}</h1>
-                // <img src="${pokemon.sprites.other.dream_world.front_default}" />
-                // <p>Peso: ${pokemon.weight}lbs |
-                // Altura: ${pokemon.height}"
-                // | HP: ${pokemon.stats[0].base_stat}</p>
-                // </div>
-            
-          });
-      }
+function cargarPokemon(numero) {
+  fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
+    .then((response) => response.json())
+    .then((poke) => {
+      divInfoPokemon.innerHTML = `
+
+      <div class="pokemon">
+      <p class="pokemon-id-back">#${poke.id}</p>
+      <div class="pokemon-imagen">
+              <img src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
+          </div>
+      <div class="pokemon-info">
+          <div class="nombre-contenedor">
+              <p class="pokemon-id">#${poke.id}</p>
+              <h2 class="pokemon-nombre">${poke.name}</h2>
+          </div>
+          <div class="pokemon-tipos">
+          
+          </div>
+          <div class="pokemon-stats">
+              <p class="stat">${poke.height}M</p>
+              <p class="stat">${poke.weight}KG</p>
+          </div>
+          <div>
+        <a href="#" class="btnAgegar" data-id="">Agregar a la pokeball</a>
+        </div>
+      </div>
+  </div>`;
+      // <div class="pokemon">
+      // <h1>#${pokemon.id} ${pokemon.name}</h1>
+      // <img src="${pokemon.sprites.other.dream_world.front_default}" />
+      // <p>Peso: ${pokemon.weight}lbs |
+      // Altura: ${pokemon.height}"
+      // | HP: ${pokemon.stats[0].base_stat}</p>
+      // </div>
+    });
+}
