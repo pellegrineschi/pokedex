@@ -39,7 +39,7 @@ ul {
 
 button {
   background-color: transparent;
-  border: 0;
+  border: 1;
   border-radius: 0;
 }
 
@@ -136,6 +136,7 @@ main {
   padding-inline: 1rem;
   display: flex;
   justify-content: center;
+  
 }
 
 .pokemon-imagen img {
@@ -290,7 +291,7 @@ main {
 
 #inputPokemon {
   width: 80%;
-  font-size: 40px;
+  font-size: 30px;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 40px;

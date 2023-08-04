@@ -1,9 +1,6 @@
-class Pokemon {
-  constructor(id, nombre, imegen = false) {
-    (this.id = id), (this.nombre = nombre), (this.imegen = imegen);
-  }
-}
 
+
+const todosPokemon = [];
 const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 let URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -13,6 +10,9 @@ for (let i = 1; i <= 151; i++) {
     .then((response) => response.json())
     .then((data) => mostrarPokemon(data));
 }
+
+
+
 
 function mostrarPokemon(poke) {
   let tipos = poke.types.map(
@@ -41,20 +41,17 @@ function mostrarPokemon(poke) {
             <p class="stat">${poke.height}M</p>
             <p class="stat">${poke.weight}KG</p>
         </div>
-        <div>
-        <a href="#" class="btnAgregar">Agregar a la pokeball</a>
-        </div>
+        
     </div>
 </div>`;
   //botones
-  const botonesAgregar = document.querySelectorAll(".btnAgregar");
-  for(const boton of botonesAgregar){
-    boton.addEventListener("click",(event) => {
-      event.preventDefault();
-      console.log("estyo hacindo click en agragar a la pokeball");
-
-    })
-  }
+  // const botonesAgregar = document.querySelectorAll(".btnAgregar");
+  // for (const boton of botonesAgregar) {
+  //   boton.addEventListener("click", (event) => {
+  //     event.preventDefault();
+  //     console.log("estyo hacindo click en agragar a la pokeball");
+  //   });
+  // }
 
   listaPokemon.append(div);
 }
@@ -90,7 +87,7 @@ const divInfoPokemon = document.querySelector("#infoPokemon");
 
 formPokemon.addEventListener("submit", (event) => {
   event.preventDefault();
-  divInfoPokemon.innerHTML = "<img src='loading.webp' />";
+  
   cargarPokemon(inputPokemon.value);
 });
 
@@ -117,11 +114,16 @@ function cargarPokemon(numero) {
               <p class="stat">${poke.height}M</p>
               <p class="stat">${poke.weight}KG</p>
           </div>
-          <div>
-        <a href="#" class="btnAgegar" data-id="">Agregar a la pokeball</a>
-        </div>
+         
       </div>
   </div>`;
+      const botonesAgregar = document.querySelectorAll(".btnAgregar");
+      for (const boton of botonesAgregar) {
+        boton.addEventListener("click", (event) => {
+          event.preventDefault();
+          console.log(boton.datset.id);
+        });
+      }
       // <div class="pokemon">
       // <h1>#${pokemon.id} ${pokemon.name}</h1>
       // <img src="${pokemon.sprites.other.dream_world.front_default}" />
