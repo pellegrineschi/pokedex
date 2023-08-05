@@ -1,6 +1,3 @@
-
-
-const todosPokemon = [];
 const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 let URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -11,21 +8,16 @@ for (let i = 1; i <= 150; i++) {
     .then((data) => mostrarPokemon(data));
 }
 
-
-
-
 function mostrarPokemon(poke) {
-  let tipos = poke.types.map(
-    (type) => `<p class ="${type.type.name} tipo">${type.type.name}</p>`
-  );
+  let tipos = poke.types.map((type) => `<p>tipo: ${type.type.name}</p>`);
   tipos = tipos.join("");
 
   const div = document.createElement("div");
   div.classList.add("pokemon");
   div.innerHTML = `
 
-    <div class="pokemon">
-    <p class="pokemon-id-back">#${poke.id}</p>
+  <div class="pokemon">
+    
     <div class="pokemon-imagen">
             <img src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
         </div>
@@ -38,8 +30,8 @@ function mostrarPokemon(poke) {
             ${tipos}
         </div>
         <div class="pokemon-stats">
-            <p class="stat">${poke.height}M</p>
-            <p class="stat">${poke.weight}KG</p>
+            <p>Altura: ${poke.height}M</p>
+            <p>Peso: ${poke.weight}KG</p>
         </div>
         
     </div>
@@ -87,18 +79,20 @@ const divInfoPokemon = document.querySelector("#infoPokemon");
 
 formPokemon.addEventListener("submit", (event) => {
   event.preventDefault();
-  
+
   cargarPokemon(inputPokemon.value);
 });
 
 function cargarPokemon(numero) {
+  
+
   fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
     .then((response) => response.json())
     .then((poke) => {
       divInfoPokemon.innerHTML = `
 
       <div class="pokemon">
-      <p class="pokemon-id-back">#${poke.id}</p>
+      
       <div class="pokemon-imagen">
               <img src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
           </div>
@@ -108,11 +102,11 @@ function cargarPokemon(numero) {
               <h2 class="pokemon-nombre">${poke.name}</h2>
           </div>
           <div class="pokemon-tipos">
-          
+            
           </div>
           <div class="pokemon-stats">
-              <p class="stat">${poke.height}M</p>
-              <p class="stat">${poke.weight}KG</p>
+              <p >Atura: ${poke.height}M</p>
+              <p >Peso: ${poke.weight}KG</p>
           </div>
          
       </div>
