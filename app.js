@@ -84,11 +84,13 @@ formPokemon.addEventListener("submit", (event) => {
 });
 
 function cargarPokemon(numero) {
-  
-
   fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
     .then((response) => response.json())
     .then((poke) => {
+
+      let tipos = poke.types.map((type)=>`<p>tipo: ${type.type.name}</p>`);
+      tipos = tipos.join("");
+      console.log(tipos);
       divInfoPokemon.innerHTML = `
 
       <div class="pokemon">
@@ -108,7 +110,7 @@ function cargarPokemon(numero) {
               <p >Atura: ${poke.height}M</p>
               <p >Peso: ${poke.weight}KG</p>
           </div>
-         
+            ${tipos}
       </div>
   </div>`;
       const botonesAgregar = document.querySelectorAll(".btnAgregar");
