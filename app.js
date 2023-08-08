@@ -1,15 +1,20 @@
+//Elementos
 const listaPokemon = document.querySelector("#listaPokemon");
 const botonesHeader = document.querySelectorAll(".btn-header");
 let URL = "https://pokeapi.co/api/v2/pokemon/";
 
+//Recorro la url 151 veces
 for (let i = 1; i <= 150; i++) {
   fetch(URL + i)
     .then((response) => response.json())
     .then((data) => mostrarPokemon(data));
 }
 
+//Muestas la data obtenidad del fetch
 function mostrarPokemon(poke) {
+  //Me devuelve  un array con los tipos de pokemon y armo con funcion flecha un parrafo con ellos
   let tipos = poke.types.map((type) => `<p>tipo: ${type.type.name}</p>`);
+  //Junta los elementos de un Array en un String
   tipos = tipos.join("");
 
   const div = document.createElement("div");
@@ -27,7 +32,7 @@ function mostrarPokemon(poke) {
             <h2 class="pokemon-nombre">${poke.name}</h2>
         </div>
         <div class="pokemon-tipos">
-            ${tipos}
+         ${tipos}
         </div>
         <div class="pokemon-stats">
             <p>Altura: ${poke.height}M</p>
@@ -36,21 +41,14 @@ function mostrarPokemon(poke) {
         
     </div>
 </div>`;
-  //botones
-  // const botonesAgregar = document.querySelectorAll(".btnAgregar");
-  // for (const boton of botonesAgregar) {
-  //   boton.addEventListener("click", (event) => {
-  //     event.preventDefault();
-  //     console.log("estyo hacindo click en agragar a la pokeball");
-  //   });
-  // }
 
   listaPokemon.append(div);
 }
-
+// botones para filtar por tipos de pokemon
+//Eventos
 botonesHeader.forEach((boton) =>
   boton.addEventListener("click", (event) => {
-    const botonId = event.currentTarget.id;
+    const botonId = event.currentTarget.id; // Trae el id del boton que clikeamos en el html
 
     listaPokemon.innerHTML = "";
 
@@ -61,7 +59,8 @@ botonesHeader.forEach((boton) =>
           if (botonId === "ver-todos") {
             mostrarPokemon(data);
           } else {
-            const tipos = data.types.map((type) => type.type.name);
+            const tipos = data.types.map((type) => type.type.name); // Me devuelve un Array con los nombres de tipo
+            //Buscamos dentro del Array si hay incluido tipo guardado en la variable botonId
             if (tipos.some((tipo) => tipo.includes(botonId))) {
               mostrarPokemon(data);
             }
@@ -71,8 +70,8 @@ botonesHeader.forEach((boton) =>
   })
 );
 
-//barra de busqueda
-
+//Barra de busqueda
+//Elementos
 const formPokemon = document.querySelector("#formPokemon");
 const inputPokemon = document.querySelector("#inputPokemon");
 const divInfoPokemon = document.querySelector("#infoPokemon");
@@ -87,8 +86,7 @@ function cargarPokemon(numero) {
   fetch("https://pokeapi.co/api/v2/pokemon/" + numero)
     .then((response) => response.json())
     .then((poke) => {
-
-      let tipos = poke.types.map((type)=>`<p>tipo: ${type.type.name}</p>`);
+      let tipos = poke.types.map((type) => `<p>tipo: ${type.type.name}</p>`);
       tipos = tipos.join("");
       console.log(tipos);
       divInfoPokemon.innerHTML = `
@@ -113,19 +111,5 @@ function cargarPokemon(numero) {
             ${tipos}
       </div>
   </div>`;
-      const botonesAgregar = document.querySelectorAll(".btnAgregar");
-      for (const boton of botonesAgregar) {
-        boton.addEventListener("click", (event) => {
-          event.preventDefault();
-          console.log(boton.datset.id);
-        });
-      }
-      // <div class="pokemon">
-      // <h1>#${pokemon.id} ${pokemon.name}</h1>
-      // <img src="${pokemon.sprites.other.dream_world.front_default}" />
-      // <p>Peso: ${pokemon.weight}lbs |
-      // Altura: ${pokemon.height}"
-      // | HP: ${pokemon.stats[0].base_stat}</p>
-      // </div>
     });
 }
