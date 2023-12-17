@@ -49,22 +49,50 @@ for (let i = 1; i <= 150; i++) {
 // en este caso al aplicar bootstarp la proyecto tuvq que modificar la funcion, ya que la misma me crea un div adicional que envuleve a la tajeta
 //al agregar un div adicional por card este me genera conflicto con la grid de bootstarp
 
+// function mostrarPokemon(poke) {
+//   // Me devuelve un array con los tipos de pokemon y armo con función flecha un párrafo con ellos
+//   let tipos = poke.types.map((type) => `<p>tipo: ${type.type.name}</p>`);
+//   // Junta los elementos de un Array en un String
+//   tipos = tipos.join("");
+
+//   // Crear la tarjeta directamente, sin un div adicional
+//   const card = document.createElement("div");
+//   card.classList.add("col-lg-4", "mb-4"); // Clases Bootstrap para el diseño
+//   card.innerHTML = `
+//     <div class="card">
+//       <img class="card-img-top" src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
+//       <div class="card-body">
+//         <h5 class="text-uppercase card-title">${poke.name}</h5>
+//         <h6 class="card-subtitle text-muted mb-2">#${poke.id}</h6>
+//         <div class="card" style="width: 18rem;">
+//           <ul class="list-group list-group-flush">
+//             <li class="text-uppercase list-group-item">${tipos}</li>
+//             <li class="list-group-item">Altura: ${poke.height} M</li>
+//             <li class="list-group-item">Peso: ${poke.weight}KG</li>
+//           </ul>
+//         </div>
+//         <a href="#" class="mt-3 btn btn-primary">boton</a>
+//       </div>
+//     </div>
+//   `;
+
+//   // Agregar la tarjeta directamente al contenedor de Pokémon
+//   listaPokemon.append(card);
+// }
+
 function mostrarPokemon(poke) {
-  // Me devuelve un array con los tipos de pokemon y armo con función flecha un párrafo con ellos
   let tipos = poke.types.map((type) => `<p>tipo: ${type.type.name}</p>`);
-  // Junta los elementos de un Array en un String
   tipos = tipos.join("");
 
-  // Crear la tarjeta directamente, sin un div adicional
   const card = document.createElement("div");
-  card.classList.add("col-lg-4", "mb-4"); // Clases Bootstrap para el diseño
+  card.classList.add("col-lg-4", "mb-4", "pokemon-card"); // Clases personalizadas
   card.innerHTML = `
     <div class="card">
-      <img class="card-img-top" src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}">
+      <img class="card-img-top img-fluid" src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}" style="object-fit: cover; height: 200px; max-width: 100%;"> <!-- Ajustar la imagen -->
       <div class="card-body">
         <h5 class="text-uppercase card-title">${poke.name}</h5>
         <h6 class="card-subtitle text-muted mb-2">#${poke.id}</h6>
-        <div class="card" style="width: 18rem;">
+        <div class="card">
           <ul class="list-group list-group-flush">
             <li class="text-uppercase list-group-item">${tipos}</li>
             <li class="list-group-item">Altura: ${poke.height} M</li>
@@ -76,9 +104,9 @@ function mostrarPokemon(poke) {
     </div>
   `;
 
-  // Agregar la tarjeta directamente al contenedor de Pokémon
   listaPokemon.append(card);
 }
+
 
 
 // botones para filtar por tipos de pokemon
