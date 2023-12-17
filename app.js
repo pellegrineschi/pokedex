@@ -88,7 +88,7 @@ function mostrarPokemon(poke) {
   card.classList.add("col-lg-4", "mb-4", "pokemon-card"); // Clases personalizadas
   card.innerHTML = `
     <div class="card">
-      <img class="card-img-top img-fluid" src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}" style="object-fit: cover; height: 200px; max-width: 100%;"> <!-- Ajustar la imagen -->
+      <img class="card-img-top img-fluid" src="${poke.sprites.other.dream_world.front_default}" alt="${poke.name}" style="object-fit: cover; height: 400px; max-width: 100%;"> <!-- Ajustar la imagen -->
       <div class="card-body">
         <h5 class="text-uppercase card-title">${poke.name}</h5>
         <h6 class="card-subtitle text-muted mb-2">#${poke.id}</h6>
